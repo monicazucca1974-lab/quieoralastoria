@@ -1,43 +1,5 @@
 import { useState } from 'react';
-
-const eventi = [
-  {
-    id: 1,
-    titolo: 'Inaugurazione del Colosseo',
-    data: '25 maggio 80 d.C.',
-    luogo: 'Colosseo, Roma',
-    lat: 41.8902,
-    lon: 12.4922,
-    descrizione: "L'imperatore Tito inaugura solennemente l'Anfiteatro Flavio dopo 8 anni di costruzione."
-  },
-  {
-    id: 2,
-    titolo: 'Assassinio di Giulio Cesare',
-    data: '15 marzo 44 a.C.',
-    luogo: 'Curia di Pompeo, Roma',
-    lat: 41.8956,
-    lon: 12.4769,
-    descrizione: 'Giulio Cesare viene assassinato da un gruppo di senatori durante la seduta del Senato.'
-  },
-  {
-    id: 3,
-    titolo: 'Ultima Cena di Leonardo',
-    data: '1495-1498',
-    luogo: 'Santa Maria delle Grazie, Milano',
-    lat: 45.4659,
-    lon: 9.1706,
-    descrizione: 'Leonardo da Vinci dipinge il Cenacolo nel refettorio del convento domenicano.'
-  },
-  {
-    id: 4,
-    titolo: 'Le Cinque Giornate di Milano',
-    data: '18-22 marzo 1848',
-    luogo: 'Centro storico, Milano',
-    lat: 45.4642,
-    lon: 9.1900,
-    descrizione: 'I milanesi insorgono contro il dominio austriaco e cacciano le truppe di Radetzky dalla città.'
-  }
-];
+import eventi from './eventi';
 
 function calcolaDistanza(lat1, lon1, lat2, lon2) {
   const R = 6371;
