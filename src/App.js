@@ -27,6 +27,15 @@ const eventi = [
     lat: 45.4659,
     lon: 9.1706,
     descrizione: 'Leonardo da Vinci dipinge il Cenacolo nel refettorio del convento domenicano.'
+  },
+  {
+    id: 4,
+    titolo: 'Le Cinque Giornate di Milano',
+    data: '18-22 marzo 1848',
+    luogo: 'Centro storico, Milano',
+    lat: 45.4642,
+    lon: 9.1900,
+    descrizione: 'I milanesi insorgono contro il dominio austriaco e cacciano le truppe di Radetzky dalla città.'
   }
 ];
 
@@ -44,6 +53,7 @@ function calcolaDistanza(lat1, lon1, lat2, lon2) {
 function App() {
   const [posizione, setPosizione] = useState(null);
   const [errore, setErrore] = useState(null);
+  const [raggio, setRaggio] = useState(50);
 
   function trovaPosizione() {
     if (!navigator.geolocation) {
@@ -71,6 +81,7 @@ function App() {
         ...e,
         distanza: calcolaDistanza(posizione.lat, posizione.lon, e.lat, e.lon)
       }))
+      .filter(e => e.distanza <= raggio)
       .sort((a, b) => a.distanza - b.distanza);
   }
 
@@ -97,6 +108,26 @@ function App() {
 
       {errore && (
         <p style={{ marginTop: '20px', color: 'red' }}>{errore}</p>
+      )}
+
+      {posizione && (
+        <div style={{ marginTop: '25px' }}>
+          <p style={{ color: '#555' }}>Cerca eventi entro {raggio} km</p>
+          <input
+            type="range"
+            min="1"
+            max="500"
+            value={raggio}
+            onChange={(e) => setRaggio(Number(e.target.value))}
+            style={{ width: '250px' }}
+          />
+        </div>
+      )}
+
+      {posizione && eventiDaMostrare.length === 0 && (
+        <p style={{ marginTop: '30px', color: '#888' }}>
+          Nessun evento entro {raggio} km. Prova ad allargare la ricerca.
+        </p>
       )}
 
       {eventiDaMostrare.map(evento => (
