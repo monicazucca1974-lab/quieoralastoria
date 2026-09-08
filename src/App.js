@@ -6,7 +6,7 @@ function App() {
 
       <div style={{ 
         maxWidth: '400px', 
-        margin: '40px auto', 
+        margin: '30px auto', 
         padding: '20px', 
         border: '1px solid #ddd', 
         borderRadius: '10px',
@@ -16,6 +16,20 @@ function App() {
         <p style={{ color: '#888' }}>25 maggio 80 d.C.</p>
         <p style={{ color: '#888' }}>Colosseo, Roma</p>
         <p>L'imperatore Tito inaugura solennemente l'Anfiteatro Flavio dopo 8 anni di costruzione.</p>
+      </div>
+
+      <div style={{ 
+        maxWidth: '400px', 
+        margin: '30px auto', 
+        padding: '20px', 
+        border: '1px solid #ddd', 
+        borderRadius: '10px',
+        textAlign: 'left'
+      }}>
+        <h2 style={{ color: '#2c3e50' }}>Assassinio di Giulio Cesare</h2>
+        <p style={{ color: '#888' }}>15 marzo 44 a.C.</p>
+        <p style={{ color: '#888' }}>Curia di Pompeo, Roma</p>
+        <p>Giulio Cesare viene assassinato da un gruppo di senatori durante la seduta del Senato.</p>
       </div>
 
     </div>
