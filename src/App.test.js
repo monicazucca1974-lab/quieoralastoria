@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
+import curiosita from './curiosita';
 
 test('mostra il titolo e il sottotitolo dell\'app', () => {
   render(<App />);
@@ -19,4 +21,12 @@ test('elenca gli eventi storici', () => {
   expect(
     screen.getByRole('heading', { name: /inaugurazione del colosseo/i })
   ).toBeInTheDocument();
+});
+
+test('il tasto "Lo sapevi che" mostra una curiosità', () => {
+  render(<App />);
+  const tasto = screen.getByRole('button', { name: /lo sapevi che/i });
+  userEvent.click(tasto);
+  const testiCuriosita = curiosita.map((c) => screen.queryByText(c));
+  expect(testiCuriosita.some((el) => el !== null)).toBe(true);
 });

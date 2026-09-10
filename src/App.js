@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import eventi from './eventi';
+import curiosita from './curiosita';
 
 function calcolaDistanza(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -18,12 +19,31 @@ function anteprima(testo, lunghezza = 140) {
   return testo.slice(0, lunghezza).trimEnd() + '…';
 }
 
+// Pesca l'indice di una curiosità a caso, diverso da quello attuale.
+function altraCuriosita(indiceAttuale) {
+  if (curiosita.length <= 1) return 0;
+  let n = indiceAttuale;
+  while (n === indiceAttuale) {
+    n = Math.floor(Math.random() * curiosita.length);
+  }
+  return n;
+}
+
 function App() {
   const [posizione, setPosizione] = useState(null);
   const [errore, setErrore] = useState(null);
   const [caricamento, setCaricamento] = useState(false);
   const [raggio, setRaggio] = useState(50);
   const [eventoSelezionato, setEventoSelezionato] = useState(null);
+  const [curiositaAperta, setCuriositaAperta] = useState(false);
+  const [indiceCuriosita, setIndiceCuriosita] = useState(0);
+
+  function apriChiudiCuriosita() {
+    if (!curiositaAperta) {
+      setIndiceCuriosita(Math.floor(Math.random() * curiosita.length));
+    }
+    setCuriositaAperta(!curiositaAperta);
+  }
 
   function trovaPosizione() {
     if (!navigator.geolocation) {
@@ -115,6 +135,22 @@ function App() {
             </a>
           </p>
         )}
+        {eventoAperto.curiosita && (
+          <div style={{
+            marginTop: '25px',
+            padding: '15px 18px',
+            backgroundColor: '#f5f7fa',
+            borderLeft: '4px solid #2980b9',
+            borderRadius: '6px'
+          }}>
+            <p style={{ margin: '0 0 6px', fontWeight: 'bold', color: '#2c3e50' }}>
+              💡 Lo sapevi che…?
+            </p>
+            <p style={{ margin: 0, fontSize: '16px', lineHeight: '1.5' }}>
+              {eventoAperto.curiosita}
+            </p>
+          </div>
+        )}
       </div>
     );
   }
@@ -123,6 +159,54 @@ function App() {
     <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'Arial' }}>
       <h1 style={{ color: '#2c3e50' }}>Qui e ora</h1>
       <p style={{ fontSize: '18px', color: '#555' }}>La storia a portata di mano</p>
+
+      <div style={{ marginTop: '15px' }}>
+        <button
+          onClick={apriChiudiCuriosita}
+          style={{
+            padding: '8px 16px',
+            fontSize: '14px',
+            backgroundColor: 'transparent',
+            color: '#2980b9',
+            border: '1px solid #2980b9',
+            borderRadius: '20px',
+            cursor: 'pointer'
+          }}
+        >
+          💡 Lo sapevi che…?
+        </button>
+      </div>
+
+      {curiositaAperta && (
+        <div style={{
+          maxWidth: '400px',
+          margin: '15px auto 0',
+          padding: '15px 18px',
+          backgroundColor: '#f5f7fa',
+          borderLeft: '4px solid #2980b9',
+          borderRadius: '6px',
+          textAlign: 'left'
+        }}>
+          <p style={{ margin: 0, fontSize: '16px', lineHeight: '1.5' }}>
+            {curiosita[indiceCuriosita]}
+          </p>
+          <button
+            onClick={() => setIndiceCuriosita(altraCuriosita(indiceCuriosita))}
+            style={{
+              marginTop: '12px',
+              padding: '6px 14px',
+              fontSize: '13px',
+              backgroundColor: '#2980b9',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer'
+            }}
+          >
+            Un'altra
+          </button>
+        </div>
+      )}
 
       <button
         onClick={trovaPosizione}
