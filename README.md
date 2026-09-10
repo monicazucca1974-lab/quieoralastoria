@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Qui e ora — La storia a portata di mano
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App web di storia italiana geolocalizzata: mostra gli eventi storici
+accaduti vicino a dove si trova l'utente.
 
-## Available Scripts
+Sito online: https://quieoralastoria.netlify.app
 
-In the project directory, you can run:
+## Comandi utili
 
-### `npm start`
+Aprire prima PowerShell nella cartella del progetto:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+cd C:\Users\39339\Desktop\quieoralastoria
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Comando | Cosa fa |
+| --- | --- |
+| `npm start` | Avvia l'app in locale su http://localhost:3000 (si aggiorna da sola quando salvi un file) |
+| `npm test` | Esegue i test automatici |
+| `npm run build` | Crea la versione ottimizzata per il sito online, nella cartella `build` |
 
-### `npm test`
+## Come pubblicare le modifiche
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Netlify è collegato a GitHub: ogni `git push` sul ramo `main` aggiorna
+il sito online in 2-3 minuti, senza altri comandi.
 
-### `npm run build`
+```
+git add .
+git commit -m "descrizione della modifica"
+git push
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+(Attenzione: in `git add .` c'è uno spazio tra `add` e il punto.)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Come aggiungere un evento storico
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Gli eventi sono **solo** nel file `src/eventi.js`.
 
-### `npm run eject`
+1. Copia un blocco `{ ... }` esistente e incollalo **prima** della riga `];`
+2. Cambia i valori:
+   - `id`: un numero mai usato prima
+   - `titolo`, `data`, `luogo`: testo tra virgolette
+   - se il testo contiene un apostrofo, usa le virgolette doppie: `"L'imperatore..."`
+   - `lat` e `lon`: le coordinate GPS, numeri con il punto (es. `41.8902`)
+3. Metti la virgola dopo la parentesi graffa `}` di chiusura
+4. Salva il file (Ctrl+S), controlla su http://localhost:3000, poi pubblica
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Struttura del progetto
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `src/App.js` — tutta l'interfaccia dell'app
+- `src/eventi.js` — l'elenco degli eventi storici (i dati)
+- `src/App.test.js` — i test automatici
+- `public/index.html` — titolo della pagina e dati per Google e i social
+- `public/manifest.json` — nome e icone quando l'app viene installata sul telefono

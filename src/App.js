@@ -12,17 +12,26 @@ function calcolaDistanza(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+// Accorcia un testo lungo per l'anteprima nella lista.
+function anteprima(testo, lunghezza = 140) {
+  if (testo.length <= lunghezza) return testo;
+  return testo.slice(0, lunghezza).trimEnd() + '…';
+}
+
 function App() {
   const [posizione, setPosizione] = useState(null);
   const [errore, setErrore] = useState(null);
+  const [caricamento, setCaricamento] = useState(false);
   const [raggio, setRaggio] = useState(50);
   const [eventoSelezionato, setEventoSelezionato] = useState(null);
 
   function trovaPosizione() {
     if (!navigator.geolocation) {
-      setErrore('Il tuo browser non supporta la geolocalizzazione');
+      setErrore('Il tuo browser non supporta la geolocalizzazione.');
       return;
     }
+    setCaricamento(true);
+    setErrore(null);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setPosizione({
@@ -30,10 +39,19 @@ function App() {
           lon: pos.coords.longitude
         });
         setErrore(null);
+        setCaricamento(false);
       },
-      () => {
-        setErrore('Non riesco a trovare la tua posizione');
-      }
+      (err) => {
+        if (err.code === err.PERMISSION_DENIED) {
+          setErrore('Permesso negato. Attiva la geolocalizzazione per questo sito nelle impostazioni del browser.');
+        } else if (err.code === err.TIMEOUT) {
+          setErrore('La ricerca della posizione ha impiegato troppo tempo. Riprova.');
+        } else {
+          setErrore('Non riesco a trovare la tua posizione.');
+        }
+        setCaricamento(false);
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
     );
   }
 
@@ -96,6 +114,7 @@ function App() {
 
       <button
         onClick={trovaPosizione}
+        disabled={caricamento}
         style={{
           padding: '12px 24px',
           fontSize: '16px',
@@ -103,15 +122,16 @@ function App() {
           color: 'white',
           border: 'none',
           borderRadius: '8px',
-          cursor: 'pointer',
+          cursor: caricamento ? 'default' : 'pointer',
+          opacity: caricamento ? 0.6 : 1,
           marginTop: '20px'
         }}
       >
-        Trova la mia posizione
+        {caricamento ? 'Sto cercando…' : 'Trova la mia posizione'}
       </button>
 
       {errore && (
-        <p style={{ marginTop: '20px', color: 'red' }}>{errore}</p>
+        <p style={{ marginTop: '20px', color: 'red', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto' }}>{errore}</p>
       )}
 
       {posizione && (
@@ -123,6 +143,7 @@ function App() {
             max="500"
             value={raggio}
             onChange={(e) => setRaggio(Number(e.target.value))}
+            aria-label={`Raggio di ricerca: ${raggio} chilometri`}
             style={{ width: '250px' }}
           />
         </div>
@@ -138,6 +159,14 @@ function App() {
         <div
           key={evento.id}
           onClick={() => setEventoSelezionato(evento.id)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setEventoSelezionato(evento.id);
+            }
+          }}
+          role="button"
+          tabIndex={0}
           style={{
             maxWidth: '400px',
             margin: '30px auto',
@@ -156,9 +185,9 @@ function App() {
               {evento.distanza.toFixed(1)} km da te
             </p>
           )}
-          <p>{evento.descrizione}</p>
+          <p>{anteprima(evento.descrizione)}</p>
           <p style={{ color: '#2980b9', fontWeight: 'bold', marginTop: '10px' }}>
-            Leggi di piu &rarr;
+            Leggi di più &rarr;
           </p>
         </div>
       ))}

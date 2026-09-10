@@ -43,9 +43,9 @@ const eventi = [
     id: 5,
     titolo: 'Editto di Milano',
     data: '313 d.C.',
-    luogo: 'Milano',
-    lat: 45.4642,
-    lon: 9.1900,
+    luogo: 'Palazzo Imperiale, Milano (Mediolanum)',
+    lat: 45.4638,
+    lon: 9.1781,
     descrizione: "Gli imperatori Costantino e Licinio concedono libertà di culto ai cristiani in tutto l'Impero romano."
   },
   {
