@@ -1,6 +1,15 @@
 // QUESTO FILE CONTIENE SOLO I DATI DEGLI EVENTI.
 // Per aggiungere un evento: copia un blocco { ... }, incollalo prima della riga ];
 // e cambia i valori. Ricordati la virgola dopo la parentesi graffa } di chiusura.
+//
+// Campi di ogni evento:
+//   id          -> numero unico, mai usato prima
+//   titolo      -> nome dell'evento
+//   data        -> quando è successo
+//   luogo       -> dove è successo
+//   lat, lon    -> coordinate GPS (numeri col punto, es. 41.8902)
+//   descrizione -> una o due frasi; se c'è un apostrofo usa le virgolette doppie "..."
+//   fonte       -> link a una pagina di Wikipedia che ne parla (per il "Fonte" nel dettaglio)
 
 const eventi = [
   {
@@ -10,7 +19,8 @@ const eventi = [
     luogo: 'Colosseo, Roma',
     lat: 41.8902,
     lon: 12.4922,
-    descrizione: "L'imperatore Tito inaugura solennemente l'Anfiteatro Flavio dopo 8 anni di costruzione."
+    descrizione: "L'imperatore Tito inaugura solennemente l'Anfiteatro Flavio dopo 8 anni di costruzione.",
+    fonte: 'https://it.wikipedia.org/wiki/Colosseo'
   },
   {
     id: 2,
@@ -19,7 +29,8 @@ const eventi = [
     luogo: 'Curia di Pompeo, Roma',
     lat: 41.8956,
     lon: 12.4769,
-    descrizione: 'Giulio Cesare viene assassinato da un gruppo di senatori durante la seduta del Senato.'
+    descrizione: 'Giulio Cesare viene assassinato da un gruppo di senatori durante la seduta del Senato.',
+    fonte: 'https://it.wikipedia.org/wiki/Cesaricidio'
   },
   {
     id: 3,
@@ -28,7 +39,8 @@ const eventi = [
     luogo: 'Santa Maria delle Grazie, Milano',
     lat: 45.4659,
     lon: 9.1706,
-    descrizione: 'Leonardo da Vinci dipinge il Cenacolo nel refettorio del convento domenicano.'
+    descrizione: 'Leonardo da Vinci dipinge il Cenacolo nel refettorio del convento domenicano.',
+    fonte: 'https://it.wikipedia.org/wiki/Ultima_Cena_(Leonardo)'
   },
   {
     id: 4,
@@ -37,7 +49,8 @@ const eventi = [
     luogo: 'Centro storico, Milano',
     lat: 45.4642,
     lon: 9.1900,
-    descrizione: 'I milanesi insorgono contro il dominio austriaco e cacciano le truppe di Radetzky dalla città.'
+    descrizione: 'I milanesi insorgono contro il dominio austriaco e cacciano le truppe di Radetzky dalla città.',
+    fonte: 'https://it.wikipedia.org/wiki/Cinque_giornate_di_Milano'
   },
   {
     id: 5,
@@ -46,7 +59,8 @@ const eventi = [
     luogo: 'Palazzo Imperiale, Milano (Mediolanum)',
     lat: 45.4638,
     lon: 9.1781,
-    descrizione: "Gli imperatori Costantino e Licinio concedono libertà di culto ai cristiani in tutto l'Impero romano."
+    descrizione: "Gli imperatori Costantino e Licinio concedono libertà di culto ai cristiani in tutto l'Impero romano.",
+    fonte: 'https://it.wikipedia.org/wiki/Editto_di_Milano'
   },
   {
     id: 6,
@@ -55,7 +69,8 @@ const eventi = [
     luogo: 'Cattedrale di Santa Maria del Fiore, Firenze',
     lat: 43.7731,
     lon: 11.2560,
-    descrizione: "Durante la messa nel Duomo, Giuliano de' Medici viene assassinato; il fratello Lorenzo il Magnifico resta ferito ma si salva."
+    descrizione: "Durante la messa nel Duomo, Giuliano de' Medici viene assassinato; il fratello Lorenzo il Magnifico resta ferito ma si salva.",
+    fonte: 'https://it.wikipedia.org/wiki/Congiura_dei_Pazzi'
   },
   {
     id: 7,
@@ -64,7 +79,8 @@ const eventi = [
     luogo: 'Piazza della Signoria, Firenze',
     lat: 43.7696,
     lon: 11.2558,
-    descrizione: 'Il frate domenicano Savonarola viene impiccato e bruciato in piazza insieme a due confratelli, dopo la condanna per eresia.'
+    descrizione: 'Il frate domenicano Savonarola viene impiccato e bruciato in piazza insieme a due confratelli, dopo la condanna per eresia.',
+    fonte: 'https://it.wikipedia.org/wiki/Girolamo_Savonarola'
   },
   {
     id: 8,
@@ -73,7 +89,8 @@ const eventi = [
     luogo: 'Piazza Mercato, Napoli',
     lat: 40.8478,
     lon: 14.2665,
-    descrizione: "Il pescatore Masaniello guida la rivolta popolare napoletana contro le tasse imposte dal governo spagnolo."
+    descrizione: "Il pescatore Masaniello guida la rivolta popolare napoletana contro le tasse imposte dal governo spagnolo.",
+    fonte: 'https://it.wikipedia.org/wiki/Masaniello'
   },
   {
     id: 9,
@@ -82,7 +99,8 @@ const eventi = [
     luogo: 'Pompei',
     lat: 40.7491,
     lon: 14.4869,
-    descrizione: "L'eruzione del Vesuvio seppellisce sotto cenere e lapilli le città di Pompei, Ercolano e Stabia."
+    descrizione: "L'eruzione del Vesuvio seppellisce sotto cenere e lapilli le città di Pompei, Ercolano e Stabia.",
+    fonte: 'https://it.wikipedia.org/wiki/Eruzione_del_Vesuvio_del_79'
   },
   {
     id: 10,
@@ -91,7 +109,8 @@ const eventi = [
     luogo: 'Piazza dei Miracoli, Pisa',
     lat: 43.7230,
     lon: 10.3966,
-    descrizione: 'Iniziano i lavori del campanile del Duomo; la torre comincia a pendere già durante la costruzione per il cedimento del terreno.'
+    descrizione: 'Iniziano i lavori del campanile del Duomo; la torre comincia a pendere già durante la costruzione per il cedimento del terreno.',
+    fonte: 'https://it.wikipedia.org/wiki/Torre_di_Pisa'
   },
   {
     id: 11,
@@ -100,7 +119,8 @@ const eventi = [
     luogo: 'Bologna',
     lat: 44.4949,
     lon: 11.3426,
-    descrizione: "Nasce lo Studium di Bologna, considerato la più antica università del mondo occidentale ancora in attività."
+    descrizione: "Nasce lo Studium di Bologna, considerato la più antica università del mondo occidentale ancora in attività.",
+    fonte: "https://it.wikipedia.org/wiki/Università_di_Bologna"
   },
   {
     id: 12,
@@ -109,7 +129,8 @@ const eventi = [
     luogo: 'Chiesa di Santo Spirito, Palermo',
     lat: 38.0940,
     lon: 13.3772,
-    descrizione: "All'ora dei vespri scoppia a Palermo la rivolta contro il dominio angioino francese, che si estende a tutta la Sicilia."
+    descrizione: "All'ora dei vespri scoppia a Palermo la rivolta contro il dominio angioino francese, che si estende a tutta la Sicilia.",
+    fonte: 'https://it.wikipedia.org/wiki/Vespri_siciliani'
   },
   {
     id: 13,
@@ -118,7 +139,8 @@ const eventi = [
     luogo: 'Palazzo Carignano, Torino',
     lat: 45.0672,
     lon: 7.6858,
-    descrizione: "Il primo Parlamento italiano, riunito a Torino, proclama Vittorio Emanuele II re d'Italia."
+    descrizione: "Il primo Parlamento italiano, riunito a Torino, proclama Vittorio Emanuele II re d'Italia.",
+    fonte: "https://it.wikipedia.org/wiki/Proclamazione_del_Regno_d'Italia"
   },
   {
     id: 14,
@@ -127,7 +149,8 @@ const eventi = [
     luogo: 'Porta Pia, Roma',
     lat: 41.9110,
     lon: 12.5040,
-    descrizione: "I bersaglieri entrano a Roma attraverso una breccia presso Porta Pia: finisce lo Stato Pontificio e Roma diventa capitale d'Italia."
+    descrizione: "I bersaglieri entrano a Roma attraverso una breccia presso Porta Pia: finisce lo Stato Pontificio e Roma diventa capitale d'Italia.",
+    fonte: 'https://it.wikipedia.org/wiki/Presa_di_Roma'
   },
   {
     id: 15,
@@ -136,7 +159,8 @@ const eventi = [
     luogo: 'Magenta, Milano',
     lat: 45.46282,
     lon: 8.87702,
-    descrizione: "L'esercito franco-piemontese, guidato da Napoleone III, sconfigge l'esercito imperiale austriaco, aprendo la strada verso Milano."
+    descrizione: "L'esercito franco-piemontese, guidato da Napoleone III, sconfigge l'esercito imperiale austriaco, aprendo la strada verso Milano.",
+    fonte: 'https://it.wikipedia.org/wiki/Battaglia_di_Magenta'
   },
   {
     id: 16,
@@ -145,7 +169,8 @@ const eventi = [
     luogo: 'Legnano, Milano',
     lat: 45.5931,
     lon: 8.9186,
-    descrizione: "I Comuni della Lega Lombarda sconfiggono l'esercito dell'imperatore Federico Barbarossa, difendendo la loro autonomia."
+    descrizione: "I Comuni della Lega Lombarda sconfiggono l'esercito dell'imperatore Federico Barbarossa, difendendo la loro autonomia.",
+    fonte: 'https://it.wikipedia.org/wiki/Battaglia_di_Legnano'
   },
   {
     id: 17,
@@ -154,7 +179,8 @@ const eventi = [
     luogo: 'Pavia',
     lat: 45.1847,
     lon: 9.1582,
-    descrizione: "Il re longobardo Rotari promulga a Pavia la prima raccolta scritta delle leggi del suo popolo, in lingua latina."
+    descrizione: "Il re longobardo Rotari promulga a Pavia la prima raccolta scritta delle leggi del suo popolo, in lingua latina.",
+    fonte: 'https://it.wikipedia.org/wiki/Editto_di_Rotari'
   },
   {
     id: 18,
@@ -163,7 +189,8 @@ const eventi = [
     luogo: 'Basilica di San Pietro, Roma',
     lat: 41.9022,
     lon: 12.4539,
-    descrizione: "Papa Leone III incorona Carlo Magno imperatore dei Romani durante la messa di Natale, dando vita al Sacro Romano Impero."
+    descrizione: "Papa Leone III incorona Carlo Magno imperatore dei Romani durante la messa di Natale, dando vita al Sacro Romano Impero.",
+    fonte: 'https://it.wikipedia.org/wiki/Carlo_Magno'
   },
   {
     id: 19,
@@ -172,7 +199,8 @@ const eventi = [
     luogo: 'Rialto, Venezia',
     lat: 45.4380,
     lon: 12.3358,
-    descrizione: "La tradizione fissa in questa data la nascita di Venezia, con la dedicazione della chiesa di San Giacomo di Rialto."
+    descrizione: "La tradizione fissa in questa data la nascita di Venezia, con la dedicazione della chiesa di San Giacomo di Rialto.",
+    fonte: 'https://it.wikipedia.org/wiki/Storia_di_Venezia'
   },
   {
     id: 20,
@@ -181,7 +209,8 @@ const eventi = [
     luogo: "Campo de' Fiori, Roma",
     lat: 41.8955,
     lon: 12.4722,
-    descrizione: "Il filosofo Giordano Bruno viene arso vivo per eresia; nel 1889 gli viene dedicata la statua che ancora domina la piazza."
+    descrizione: "Il filosofo Giordano Bruno viene arso vivo per eresia; nel 1889 gli viene dedicata la statua che ancora domina la piazza.",
+    fonte: 'https://it.wikipedia.org/wiki/Giordano_Bruno'
   },
   {
     id: 21,
@@ -190,7 +219,8 @@ const eventi = [
     luogo: 'Barletta',
     lat: 41.3193,
     lon: 16.2820,
-    descrizione: "Tredici cavalieri italiani guidati da Ettore Fieramosca sconfiggono in duello altrettanti cavalieri francesi."
+    descrizione: "Tredici cavalieri italiani guidati da Ettore Fieramosca sconfiggono in duello altrettanti cavalieri francesi.",
+    fonte: 'https://it.wikipedia.org/wiki/Disfida_di_Barletta'
   },
   {
     id: 22,
@@ -199,7 +229,8 @@ const eventi = [
     luogo: "Castel Sant'Angelo, Roma",
     lat: 41.9031,
     lon: 12.4663,
-    descrizione: "Le truppe imperiali di Carlo V, in gran parte lanzichenecchi, saccheggiano Roma per mesi; papa Clemente VII si rifugia in Castel Sant'Angelo."
+    descrizione: "Le truppe imperiali di Carlo V, in gran parte lanzichenecchi, saccheggiano Roma per mesi; papa Clemente VII si rifugia in Castel Sant'Angelo.",
+    fonte: 'https://it.wikipedia.org/wiki/Sacco_di_Roma_(1527)'
   },
   {
     id: 23,
@@ -208,7 +239,8 @@ const eventi = [
     luogo: 'Parco Visconteo, Pavia',
     lat: 45.2028,
     lon: 9.1503,
-    descrizione: "L'esercito di Carlo V sconfigge i francesi e cattura il re Francesco I, che scrive: \"Tutto è perduto fuorché l'onore\"."
+    descrizione: "L'esercito di Carlo V sconfigge i francesi e cattura il re Francesco I, che scrive: \"Tutto è perduto fuorché l'onore\".",
+    fonte: 'https://it.wikipedia.org/wiki/Battaglia_di_Pavia_(1525)'
   },
   {
     id: 24,
@@ -217,7 +249,8 @@ const eventi = [
     luogo: 'Cattedrale di San Vigilio, Trento',
     lat: 46.0679,
     lon: 11.1211,
-    descrizione: "Il concilio che avvia la Controriforma cattolica si riunisce a più riprese a Trento per quasi vent'anni."
+    descrizione: "Il concilio che avvia la Controriforma cattolica si riunisce a più riprese a Trento per quasi vent'anni.",
+    fonte: 'https://it.wikipedia.org/wiki/Concilio_di_Trento'
   },
   {
     id: 25,
@@ -226,7 +259,8 @@ const eventi = [
     luogo: 'Convento di Santa Maria sopra Minerva, Roma',
     lat: 41.8983,
     lon: 12.4779,
-    descrizione: "Processato dall'Inquisizione per aver sostenuto che la Terra gira intorno al Sole, Galileo è costretto ad abiurare le sue idee."
+    descrizione: "Processato dall'Inquisizione per aver sostenuto che la Terra gira intorno al Sole, Galileo è costretto ad abiurare le sue idee.",
+    fonte: 'https://it.wikipedia.org/wiki/Processo_a_Galileo_Galilei'
   },
   {
     id: 26,
@@ -235,7 +269,8 @@ const eventi = [
     luogo: 'Duomo di Milano',
     lat: 45.4641,
     lon: 9.1919,
-    descrizione: "Napoleone Bonaparte si cinge il capo con la Corona Ferrea dicendo: \"Dio me l'ha data, guai a chi la tocca\"."
+    descrizione: "Napoleone Bonaparte si cinge il capo con la Corona Ferrea dicendo: \"Dio me l'ha data, guai a chi la tocca\".",
+    fonte: "https://it.wikipedia.org/wiki/Regno_d'Italia_(1805-1814)"
   },
   {
     id: 27,
@@ -244,7 +279,8 @@ const eventi = [
     luogo: 'Quarto, Genova',
     lat: 44.3866,
     lon: 9.0353,
-    descrizione: "Giuseppe Garibaldi salpa con circa mille volontari su due piroscafi per liberare il Regno delle Due Sicilie."
+    descrizione: "Giuseppe Garibaldi salpa con circa mille volontari su due piroscafi per liberare il Regno delle Due Sicilie.",
+    fonte: 'https://it.wikipedia.org/wiki/Spedizione_dei_Mille'
   },
   {
     id: 28,
@@ -253,7 +289,8 @@ const eventi = [
     luogo: 'Marsala',
     lat: 37.7986,
     lon: 12.4360,
-    descrizione: "I Mille di Garibaldi sbarcano in Sicilia dando inizio alla spedizione che porterà alla caduta dei Borbone."
+    descrizione: "I Mille di Garibaldi sbarcano in Sicilia dando inizio alla spedizione che porterà alla caduta dei Borbone.",
+    fonte: 'https://it.wikipedia.org/wiki/Spedizione_dei_Mille'
   },
   {
     id: 29,
@@ -262,7 +299,8 @@ const eventi = [
     luogo: 'Solferino, Mantova',
     lat: 45.3719,
     lon: 10.5686,
-    descrizione: "Franco-piemontesi e austriaci si scontrano in una battaglia sanguinosissima; il ricordo dei feriti abbandonati ispira a Henry Dunant la Croce Rossa."
+    descrizione: "Franco-piemontesi e austriaci si scontrano in una battaglia sanguinosissima; il ricordo dei feriti abbandonati ispira a Henry Dunant la Croce Rossa.",
+    fonte: 'https://it.wikipedia.org/wiki/Battaglia_di_Solferino_e_San_Martino'
   },
   {
     id: 30,
@@ -271,7 +309,8 @@ const eventi = [
     luogo: 'Teano, Caserta',
     lat: 41.2497,
     lon: 14.0653,
-    descrizione: "Garibaldi consegna a Vittorio Emanuele II le terre conquistate nel Sud, salutandolo come re d'Italia."
+    descrizione: "Garibaldi consegna a Vittorio Emanuele II le terre conquistate nel Sud, salutandolo come re d'Italia.",
+    fonte: 'https://it.wikipedia.org/wiki/Incontro_di_Teano'
   },
   {
     id: 31,
@@ -280,7 +319,8 @@ const eventi = [
     luogo: 'Messina',
     lat: 38.1938,
     lon: 15.5540,
-    descrizione: "Un terremoto seguito da un maremoto distrugge Messina e Reggio Calabria, causando decine di migliaia di vittime."
+    descrizione: "Un terremoto seguito da un maremoto distrugge Messina e Reggio Calabria, causando decine di migliaia di vittime.",
+    fonte: 'https://it.wikipedia.org/wiki/Terremoto_di_Messina_del_1908'
   },
   {
     id: 32,
@@ -289,7 +329,8 @@ const eventi = [
     luogo: 'Vittorio Veneto, Treviso',
     lat: 45.9950,
     lon: 12.3000,
-    descrizione: "L'offensiva finale dell'esercito italiano sfonda il fronte austro-ungarico e porta all'armistizio del 4 novembre 1918."
+    descrizione: "L'offensiva finale dell'esercito italiano sfonda il fronte austro-ungarico e porta all'armistizio del 4 novembre 1918.",
+    fonte: 'https://it.wikipedia.org/wiki/Battaglia_di_Vittorio_Veneto'
   },
   {
     id: 33,
@@ -298,7 +339,8 @@ const eventi = [
     luogo: 'Roma',
     lat: 41.9000,
     lon: 12.4790,
-    descrizione: "Con un referendum gli italiani, per la prima volta anche le donne, scelgono la repubblica al posto della monarchia."
+    descrizione: "Con un referendum gli italiani, per la prima volta anche le donne, scelgono la repubblica al posto della monarchia.",
+    fonte: 'https://it.wikipedia.org/wiki/Nascita_della_Repubblica_Italiana'
   },
   {
     id: 34,
@@ -307,7 +349,8 @@ const eventi = [
     luogo: 'Firenze',
     lat: 43.7700,
     lon: 11.2560,
-    descrizione: "L'Arno straripa e sommerge la città; da tutto il mondo arrivano volontari, gli \"angeli del fango\", per salvare libri e opere d'arte."
+    descrizione: "L'Arno straripa e sommerge la città; da tutto il mondo arrivano volontari, gli \"angeli del fango\", per salvare libri e opere d'arte.",
+    fonte: 'https://it.wikipedia.org/wiki/Alluvione_di_Firenze_del_4_novembre_1966'
   },
   {
     id: 35,
@@ -316,10 +359,9 @@ const eventi = [
     luogo: 'Diga del Vajont, Longarone',
     lat: 46.2673,
     lon: 12.3289,
-    descrizione: "Una frana dal monte Toc precipita nel bacino artificiale: l'ondata scavalca la diga e distrugge Longarone e i paesi vicini."
+    descrizione: "Una frana dal monte Toc precipita nel bacino artificiale: l'ondata scavalca la diga e distrugge Longarone e i paesi vicini.",
+    fonte: 'https://it.wikipedia.org/wiki/Disastro_del_Vajont'
   }
 ];
 
 export default eventi;
-
-

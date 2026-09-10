@@ -103,6 +103,18 @@ function App() {
         <p style={{ fontSize: '17px', lineHeight: '1.6', marginTop: '20px' }}>
           {eventoAperto.descrizione}
         </p>
+        {eventoAperto.fonte && (
+          <p style={{ marginTop: '20px' }}>
+            <a
+              href={eventoAperto.fonte}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#2980b9' }}
+            >
+              Fonte: Wikipedia &nearr;
+            </a>
+          </p>
+        )}
       </div>
     );
   }
