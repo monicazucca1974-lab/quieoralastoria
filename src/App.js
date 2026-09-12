@@ -5,6 +5,17 @@ import curiosita from './curiosita';
 const CHIAVE_PREFERITI = 'quieoralastoria_preferiti';
 const EPOCHE = ['Roma antica', 'Medioevo', 'Rinascimento', 'Età moderna', 'Risorgimento', 'Novecento'];
 
+// Palette cromatica dell'app: giallo ocra (dominante) + blu oltremare (secondario).
+const COLORI = {
+  ocra: '#D3A625',
+  ocraChiaro: '#E5C35A',
+  ocraScuro: '#A77B12',
+  blu: '#120A8F',
+  bluChiaro: '#2742B8',
+  bluScuro: '#08055C',
+  biancoCaldo: '#FFF9E8'
+};
+
 function calcolaDistanza(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -46,7 +57,7 @@ function stileInput() {
     padding: '8px 10px',
     fontSize: '14px',
     borderRadius: '6px',
-    border: '1px solid #ccc',
+    border: `1px solid ${COLORI.bluChiaro}`,
     fontFamily: 'Arial'
   };
 }
@@ -188,15 +199,15 @@ function App() {
     const eEPreferito = preferiti.includes(eventoAperto.id);
 
     return (
-      <div style={{ maxWidth: '500px', margin: '40px auto', padding: '0 20px', fontFamily: 'Arial' }}>
+      <div style={{ maxWidth: '500px', margin: '40px auto', padding: '20px', fontFamily: 'Arial', backgroundColor: COLORI.biancoCaldo }}>
         <button
           onClick={() => setEventoSelezionato(null)}
           style={{
             padding: '10px 18px',
             fontSize: '15px',
-            backgroundColor: '#eee',
-            color: '#2c3e50',
-            border: 'none',
+            backgroundColor: COLORI.ocraChiaro,
+            color: COLORI.blu,
+            border: `1px solid ${COLORI.blu}`,
             borderRadius: '8px',
             cursor: 'pointer'
           }}
@@ -205,7 +216,7 @@ function App() {
         </button>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: '25px' }}>
-          <h1 style={{ color: '#2c3e50', margin: 0 }}>{eventoAperto.titolo}</h1>
+          <h1 style={{ color: COLORI.blu, margin: 0 }}>{eventoAperto.titolo}</h1>
           <button
             onClick={() => alternaPreferito(eventoAperto.id)}
             aria-label={eEPreferito ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti'}
@@ -214,7 +225,7 @@ function App() {
               border: 'none',
               fontSize: '28px',
               cursor: 'pointer',
-              color: eEPreferito ? '#e8a93a' : '#ccc',
+              color: eEPreferito ? COLORI.ocraScuro : '#ccc',
               lineHeight: 1
             }}
           >
@@ -245,9 +256,9 @@ function App() {
 
         <p style={{ color: '#888', fontSize: '17px', marginTop: '15px' }}>{eventoAperto.data}</p>
         <p style={{ color: '#888', fontSize: '17px' }}>{eventoAperto.luogo}</p>
-        <p style={{ color: '#2980b9', fontSize: '14px', fontWeight: 'bold' }}>{eventoAperto.categoria}</p>
+        <p style={{ color: COLORI.blu, fontSize: '14px', fontWeight: 'bold' }}>{eventoAperto.categoria}</p>
         {eventoAperto.distanza !== undefined && (
-          <p style={{ color: '#2c3e50', fontWeight: 'bold' }}>
+          <p style={{ color: COLORI.blu, fontWeight: 'bold' }}>
             {eventoAperto.distanza.toFixed(1)} km da te
           </p>
         )}
@@ -260,7 +271,7 @@ function App() {
               href={eventoAperto.fonte}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#2980b9' }}
+              style={{ color: COLORI.bluChiaro }}
             >
               Fonte: Wikipedia &nearr;
             </a>
@@ -270,14 +281,14 @@ function App() {
           <div style={{
             marginTop: '25px',
             padding: '15px 18px',
-            backgroundColor: '#f5f7fa',
-            borderLeft: '4px solid #2980b9',
+            backgroundColor: COLORI.blu,
+            borderLeft: `4px solid ${COLORI.ocra}`,
             borderRadius: '6px'
           }}>
-            <p style={{ margin: '0 0 6px', fontWeight: 'bold', color: '#2c3e50' }}>
+            <p style={{ margin: '0 0 6px', fontWeight: 'bold', color: COLORI.biancoCaldo }}>
               💡 Lo sapevi che…?
             </p>
-            <p style={{ margin: 0, fontSize: '16px', lineHeight: '1.5' }}>
+            <p style={{ margin: 0, fontSize: '16px', lineHeight: '1.5', color: COLORI.biancoCaldo }}>
               {eventoAperto.curiosita}
             </p>
           </div>
@@ -285,7 +296,7 @@ function App() {
 
         {eventiCorrelati.length > 0 && (
           <div style={{ marginTop: '30px' }}>
-            <p style={{ fontWeight: 'bold', color: '#2c3e50', marginBottom: '10px' }}>
+            <p style={{ fontWeight: 'bold', color: COLORI.blu, marginBottom: '10px' }}>
               Altri eventi di questa epoca
             </p>
             {eventiCorrelati.map(e => (
@@ -302,14 +313,15 @@ function App() {
                 tabIndex={0}
                 style={{
                   padding: '10px 14px',
-                  border: '1px solid #ddd',
+                  backgroundColor: COLORI.blu,
+                  border: `1px solid ${COLORI.bluScuro}`,
                   borderRadius: '8px',
                   marginBottom: '8px',
                   cursor: 'pointer'
                 }}
               >
-                <strong style={{ color: '#2c3e50' }}>{e.titolo}</strong>
-                <div style={{ color: '#888', fontSize: '14px' }}>{e.data} — {e.luogo}</div>
+                <strong style={{ color: COLORI.biancoCaldo }}>{e.titolo}</strong>
+                <div style={{ color: COLORI.ocraChiaro, fontSize: '14px' }}>{e.data} — {e.luogo}</div>
               </div>
             ))}
           </div>
@@ -319,9 +331,9 @@ function App() {
   }
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'Arial' }}>
-      <h1 style={{ color: '#2c3e50' }}>Qui e ora</h1>
-      <p style={{ fontSize: '18px', color: '#555' }}>La storia a portata di mano</p>
+    <div style={{ textAlign: 'center', marginTop: '50px', paddingBottom: '40px', fontFamily: 'Arial', backgroundColor: COLORI.biancoCaldo }}>
+      <h1 style={{ color: COLORI.blu }}>Qui e ora</h1>
+      <p style={{ fontSize: '18px', color: COLORI.bluChiaro }}>La storia a portata di mano</p>
 
       <div style={{ marginTop: '15px' }}>
         <button
@@ -329,9 +341,9 @@ function App() {
           style={{
             padding: '8px 16px',
             fontSize: '14px',
-            backgroundColor: 'transparent',
-            color: '#2980b9',
-            border: '1px solid #2980b9',
+            backgroundColor: COLORI.ocraChiaro,
+            color: COLORI.blu,
+            border: `1px solid ${COLORI.blu}`,
             borderRadius: '20px',
             cursor: 'pointer'
           }}
@@ -345,12 +357,12 @@ function App() {
           maxWidth: '400px',
           margin: '15px auto 0',
           padding: '15px 18px',
-          backgroundColor: '#f5f7fa',
-          borderLeft: '4px solid #2980b9',
+          backgroundColor: COLORI.blu,
+          borderLeft: `4px solid ${COLORI.ocra}`,
           borderRadius: '6px',
           textAlign: 'left'
         }}>
-          <p style={{ margin: 0, fontSize: '16px', lineHeight: '1.5' }}>
+          <p style={{ margin: 0, fontSize: '16px', lineHeight: '1.5', color: COLORI.biancoCaldo }}>
             {curiosita[indiceCuriosita]}
           </p>
           <button
@@ -359,9 +371,9 @@ function App() {
               marginTop: '12px',
               padding: '6px 14px',
               fontSize: '13px',
-              backgroundColor: '#2980b9',
-              color: 'white',
-              border: 'none',
+              backgroundColor: COLORI.ocra,
+              color: COLORI.bluScuro,
+              border: `1px solid ${COLORI.blu}`,
               borderRadius: '6px',
               cursor: 'pointer'
             }}
@@ -377,8 +389,8 @@ function App() {
         style={{
           padding: '12px 24px',
           fontSize: '16px',
-          backgroundColor: '#2c3e50',
-          color: 'white',
+          backgroundColor: COLORI.blu,
+          color: COLORI.biancoCaldo,
           border: 'none',
           borderRadius: '8px',
           cursor: caricamento ? 'default' : 'pointer',
@@ -412,11 +424,11 @@ function App() {
         maxWidth: '420px',
         margin: '30px auto 0',
         padding: '18px',
-        backgroundColor: '#f5f7fa',
+        backgroundColor: COLORI.blu,
         borderRadius: '10px',
         textAlign: 'left'
       }}>
-        <label htmlFor="campo-ricerca" style={{ display: 'block', fontWeight: 'bold', color: '#2c3e50', marginBottom: '6px' }}>
+        <label htmlFor="campo-ricerca" style={{ display: 'block', fontWeight: 'bold', color: COLORI.biancoCaldo, marginBottom: '6px' }}>
           Cerca luogo, evento, personaggio…
         </label>
         <input
@@ -430,7 +442,7 @@ function App() {
 
         <div style={{ display: 'flex', gap: '10px', marginTop: '14px', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 160px' }}>
-            <label htmlFor="filtro-epoca" style={{ display: 'block', fontSize: '13px', color: '#555', marginBottom: '4px' }}>
+            <label htmlFor="filtro-epoca" style={{ display: 'block', fontSize: '13px', color: COLORI.ocraChiaro, marginBottom: '4px' }}>
               Epoca
             </label>
             <select
@@ -446,7 +458,7 @@ function App() {
             </select>
           </div>
           <div style={{ flex: '1 1 90px' }}>
-            <label htmlFor="anno-da" style={{ display: 'block', fontSize: '13px', color: '#555', marginBottom: '4px' }}>
+            <label htmlFor="anno-da" style={{ display: 'block', fontSize: '13px', color: COLORI.ocraChiaro, marginBottom: '4px' }}>
               Anno da
             </label>
             <input
@@ -459,7 +471,7 @@ function App() {
             />
           </div>
           <div style={{ flex: '1 1 90px' }}>
-            <label htmlFor="anno-a" style={{ display: 'block', fontSize: '13px', color: '#555', marginBottom: '4px' }}>
+            <label htmlFor="anno-a" style={{ display: 'block', fontSize: '13px', color: COLORI.ocraChiaro, marginBottom: '4px' }}>
               Anno a
             </label>
             <input
@@ -472,12 +484,12 @@ function App() {
             />
           </div>
         </div>
-        <p style={{ fontSize: '12px', color: '#888', margin: '6px 0 0' }}>
+        <p style={{ fontSize: '12px', color: COLORI.ocraChiaro, margin: '6px 0 0' }}>
           Per gli anni avanti Cristo usa il segno meno, es. 44 a.C. = -44.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px' }}>
-          <label style={{ fontSize: '14px', color: '#2c3e50', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <label style={{ fontSize: '14px', color: COLORI.biancoCaldo, display: 'flex', alignItems: 'center', gap: '6px' }}>
             <input
               type="checkbox"
               checked={soloPreferiti}
@@ -491,9 +503,9 @@ function App() {
               style={{
                 padding: '6px 12px',
                 fontSize: '13px',
-                backgroundColor: 'transparent',
-                color: '#2980b9',
-                border: '1px solid #2980b9',
+                backgroundColor: COLORI.ocra,
+                color: COLORI.bluScuro,
+                border: `1px solid ${COLORI.blu}`,
                 borderRadius: '6px',
                 cursor: 'pointer'
               }}
@@ -506,15 +518,16 @@ function App() {
 
       {curiositaTrovate.length > 0 && (
         <div style={{ maxWidth: '420px', margin: '25px auto 0', textAlign: 'left' }}>
-          <p style={{ fontWeight: 'bold', color: '#2c3e50' }}>💡 Curiosità trovate</p>
+          <p style={{ fontWeight: 'bold', color: COLORI.blu }}>💡 Curiosità trovate</p>
           {curiositaTrovate.map((c, i) => (
             <p key={i} style={{
-              backgroundColor: '#f5f7fa',
-              borderLeft: '4px solid #2980b9',
+              backgroundColor: COLORI.blu,
+              borderLeft: `4px solid ${COLORI.ocra}`,
               borderRadius: '6px',
               padding: '10px 14px',
               fontSize: '15px',
-              lineHeight: '1.5'
+              lineHeight: '1.5',
+              color: COLORI.biancoCaldo
             }}>
               {c}
             </p>
@@ -550,7 +563,8 @@ function App() {
               maxWidth: '400px',
               margin: '30px auto',
               padding: '20px',
-              border: '1px solid #ddd',
+              backgroundColor: COLORI.blu,
+              border: `1px solid ${COLORI.bluScuro}`,
               borderRadius: '10px',
               textAlign: 'left',
               cursor: 'pointer',
@@ -571,7 +585,7 @@ function App() {
                 border: 'none',
                 fontSize: '22px',
                 cursor: 'pointer',
-                color: eEPreferito ? '#e8a93a' : '#ccc',
+                color: eEPreferito ? COLORI.ocra : '#ccc',
                 lineHeight: 1
               }}
             >
@@ -593,17 +607,17 @@ function App() {
                 }}
               />
             )}
-            <h2 style={{ color: '#2c3e50', marginRight: '30px' }}>{evento.titolo}</h2>
-            <p style={{ color: '#888' }}>{evento.data}</p>
-            <p style={{ color: '#888' }}>{evento.luogo}</p>
-            <p style={{ color: '#2980b9', fontSize: '13px', fontWeight: 'bold' }}>{evento.categoria}</p>
+            <h2 style={{ color: COLORI.biancoCaldo, marginRight: '30px' }}>{evento.titolo}</h2>
+            <p style={{ color: COLORI.ocraChiaro }}>{evento.data}</p>
+            <p style={{ color: COLORI.ocraChiaro }}>{evento.luogo}</p>
+            <p style={{ color: COLORI.ocra, fontSize: '13px', fontWeight: 'bold' }}>{evento.categoria}</p>
             {evento.distanza !== undefined && (
-              <p style={{ color: '#2c3e50', fontWeight: 'bold' }}>
+              <p style={{ color: COLORI.biancoCaldo, fontWeight: 'bold' }}>
                 {evento.distanza.toFixed(1)} km da te
               </p>
             )}
-            <p>{anteprima(evento.descrizione)}</p>
-            <p style={{ color: '#2980b9', fontWeight: 'bold', marginTop: '10px' }}>
+            <p style={{ color: COLORI.biancoCaldo }}>{anteprima(evento.descrizione)}</p>
+            <p style={{ color: COLORI.ocraChiaro, fontWeight: 'bold', marginTop: '10px' }}>
               Leggi di più &rarr;
             </p>
           </div>
