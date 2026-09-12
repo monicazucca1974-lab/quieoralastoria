@@ -30,3 +30,27 @@ test('il tasto "Lo sapevi che" mostra una curiosità', () => {
   const testiCuriosita = curiosita.map((c) => screen.queryByText(c));
   expect(testiCuriosita.some((el) => el !== null)).toBe(true);
 });
+
+test('la ricerca filtra gli eventi per titolo', () => {
+  render(<App />);
+  const campo = screen.getByLabelText(/cerca luogo, evento, personaggio/i);
+  userEvent.type(campo, 'Colosseo');
+  expect(screen.getByRole('heading', { name: /inaugurazione del colosseo/i })).toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: /assassinio di giulio cesare/i })).not.toBeInTheDocument();
+});
+
+test('il filtro epoca mostra solo gli eventi della categoria scelta', () => {
+  render(<App />);
+  const selezione = screen.getByLabelText(/^epoca$/i);
+  userEvent.selectOptions(selezione, 'Novecento');
+  expect(screen.getByRole('heading', { name: /nascita della repubblica italiana/i })).toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: /inaugurazione del colosseo/i })).not.toBeInTheDocument();
+});
+
+test('si può aggiungere e togliere un evento dai preferiti', () => {
+  render(<App />);
+  const tastoPreferito = screen.getByRole('button', { name: /aggiungi inaugurazione del colosseo ai preferiti/i });
+  userEvent.click(tastoPreferito);
+  expect(screen.getByRole('button', { name: /rimuovi inaugurazione del colosseo dai preferiti/i })).toBeInTheDocument();
+  expect(screen.getByText(/★ solo preferiti \(1\)/i)).toBeInTheDocument();
+});
