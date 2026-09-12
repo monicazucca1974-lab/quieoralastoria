@@ -13,7 +13,8 @@ const COLORI = {
   blu: '#120A8F',
   bluChiaro: '#2742B8',
   bluScuro: '#08055C',
-  biancoCaldo: '#FFF9E8'
+  biancoCaldo: '#FFF9E8',
+  sfondo: '#F4E9C9'
 };
 
 function calcolaDistanza(lat1, lon1, lat2, lon2) {
@@ -199,7 +200,7 @@ function App() {
     const eEPreferito = preferiti.includes(eventoAperto.id);
 
     return (
-      <div style={{ maxWidth: '500px', margin: '40px auto', padding: '20px', fontFamily: 'Arial', backgroundColor: COLORI.biancoCaldo }}>
+      <div style={{ maxWidth: '500px', margin: '40px auto', padding: '20px', fontFamily: 'Arial', backgroundColor: COLORI.sfondo }}>
         <button
           onClick={() => setEventoSelezionato(null)}
           style={{
@@ -331,7 +332,7 @@ function App() {
   }
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px', paddingBottom: '40px', fontFamily: 'Arial', backgroundColor: COLORI.biancoCaldo }}>
+    <div style={{ textAlign: 'center', marginTop: '50px', paddingBottom: '40px', fontFamily: 'Arial', backgroundColor: COLORI.sfondo }}>
       <h1 style={{ color: COLORI.blu }}>Qui e ora</h1>
       <p style={{ fontSize: '18px', color: COLORI.bluChiaro }}>La storia a portata di mano</p>
 
