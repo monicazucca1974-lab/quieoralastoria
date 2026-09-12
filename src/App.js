@@ -222,7 +222,28 @@ function App() {
           </button>
         </div>
 
-        <p style={{ color: '#888', fontSize: '17px' }}>{eventoAperto.data}</p>
+        {eventoAperto.immagine && (
+          <div style={{ marginTop: '15px' }}>
+            <img
+              src={eventoAperto.immagine}
+              alt={eventoAperto.titolo}
+              loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }}
+              style={{
+                width: '100%',
+                maxHeight: '320px',
+                objectFit: 'cover',
+                borderRadius: '10px',
+                display: 'block'
+              }}
+            />
+            <p style={{ fontSize: '12px', color: '#999', margin: '4px 0 0' }}>
+              Immagine: Wikimedia Commons
+            </p>
+          </div>
+        )}
+
+        <p style={{ color: '#888', fontSize: '17px', marginTop: '15px' }}>{eventoAperto.data}</p>
         <p style={{ color: '#888', fontSize: '17px' }}>{eventoAperto.luogo}</p>
         <p style={{ color: '#2980b9', fontSize: '14px', fontWeight: 'bold' }}>{eventoAperto.categoria}</p>
         {eventoAperto.distanza !== undefined && (
@@ -556,6 +577,22 @@ function App() {
             >
               {eEPreferito ? '★' : '☆'}
             </button>
+            {evento.immagine && (
+              <img
+                src={evento.immagine}
+                alt={evento.titolo}
+                loading="lazy"
+                onError={(e) => { e.target.style.display = 'none'; }}
+                style={{
+                  width: '100%',
+                  height: '160px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  marginBottom: '12px',
+                  display: 'block'
+                }}
+              />
+            )}
             <h2 style={{ color: '#2c3e50', marginRight: '30px' }}>{evento.titolo}</h2>
             <p style={{ color: '#888' }}>{evento.data}</p>
             <p style={{ color: '#888' }}>{evento.luogo}</p>
